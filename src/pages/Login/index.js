@@ -10,59 +10,85 @@ import {
 } from './styles';
 import Header from '../../../components/Header';
 import { useNavigation } from '@react-navigation/native';
-import { Text, StyleSheet } from 'react-native'
+import { Text, StyleSheet, ActivityIndicator, TouchableOpacity} from 'react-native'
 import CheckBox from 'expo-checkbox';
-
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../services/connectionFirebase'
 
 function Login() {
   const navigation = useNavigation();
   const [isChecked, setChecked] = useState(false);
-  const [cpf, setCpf] = useState('');
-  const [senha, setSenha] = useState('');
-  const [errorCpf, setErrorCpf] = useState('')
-  const [errorSenha, setErrorSenha] = useState('');
-  const cpfCorreto = 51950721833;
-  const senhaCorreta = 'julialinda';
 
+  //Armazenamento dinamico dos dados inseridos
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  //Função valida os dados e comparar com as credencias corretas
   function ValidaFormLogin () {
-    if(cpf === ''&& senha === ''){
-      alert('Preencha o campo CPF e Senha')
+    setLoading(true)
+    if(email === ''&& senha === ''){
+      alert('Preencha o campo Email e Senha')
+      setLoading(false)
     }
-    else if(cpf === ''){
-      alert('Preencha o campo CPF')
+    else if(email === ''){
+      alert('Preencha o campo Email')
+      setLoading(false)
     }else if(senha === ''){
       alert('Preencha o campo senha')
+      setLoading(false)
     }else if(!isChecked){
       alert('Aceite os termos')
-    }else if(cpf === cpfCorreto || senha === senhaCorreta){
-      alert('Logado com sucesso')
+      setLoading(false)
+    }else{
+      Logar(); 
+    }
+  }
+
+   //Função que valida as credenciais do Usuário no Firebase
+   async function Logar(){
+    await signInWithEmailAndPassword(auth, email, senha)
+    .then(value =>{
+      setLoading(false)
       navigation.reset({
         index: 0,
         routes: [{name: "Home"}]
       })
-    }else{
-      alert('Credenciais inválidas')
-    }   
+    })
+    .catch(error => {
+      console.log(error)
+      if(error.code ==='auth/invalid-email'){
+        alert('Email inválido')
+        setLoading(false)
+      }else if(error.code === 'auth/wrong-password'){
+        alert('Senha inválida')
+        setLoading(false)
+      }else if(error.code == 'auth/user-not-found'){
+        alert('Email não cadastrado')
+        setLoading(false)
+      }
+      setLoading(false)
+    });
   }
+
   return (
     <KeyboardView>
       <Header />
       <Container>
-        <Title>Login</Title>
+        <Title style={styles.title}>Login</Title>
         <Input
           placeholderTextColor="black"
-          placeholder="CPF"
-          onChangeText={setCpf}
-          value={cpf}
-          errorMenssage={errorCpf}
+          placeholder="Email"
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          maxLength={30}    
         />
         <Input
           placeholderTextColor="black"
           placeholder="Senha"
           secureTextEntry
           onChangeText={setSenha}
-          value={senha}
-          errorMenssage={errorSenha}
+          maxLength={6}
         />
         <ContainerCheck style={styles.Containercheck}>
           <CheckBox
@@ -73,9 +99,16 @@ function Login() {
           />
           <Text style={styles.check}>Eu aceito os termos de uso</Text>
         </ContainerCheck>
-        <ButtonSubmit onPress={ValidaFormLogin}>
+        <ButtonSubmit style={styles.botoes} onPress={ValidaFormLogin} disabled={loading}
+        >
+        { loading 
+          ? <ActivityIndicator size={30} color='#FFFFFF'/>
+          : <TextButton>Entrar</TextButton>
+        }  
+        </ButtonSubmit>
+        <ButtonSubmit onPress={() => navigation.navigate('CadastroUser')}>
           <TextButton>
-            Entrar
+            Cadastre-se
           </TextButton>
         </ButtonSubmit>
       </Container>
@@ -83,14 +116,22 @@ function Login() {
   )
 }
 
+//Styles de alguns elementos do index.js
 const styles = StyleSheet.create({
   Containercheck: {
-    marginBottom: 5,
+    marginBottom: 15,
+     
     display: 'flex',
     flexDirection: 'row',
   },
   check: {
     marginLeft: 10,
+  },
+  botoes:{
+    marginBottom: 25,
+  },
+  title:{
+    marginTop: 25,
   }
 });
 

@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   icone:{
-    paddingTop: 20,
+    paddingTop: 10,
     marginRight: 37,
   },
   texto:{
