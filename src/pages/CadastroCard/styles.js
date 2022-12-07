@@ -10,9 +10,10 @@ export const ContainerMain = styled.View`
   background-color: white;
 `
 export const ContainerForm = styled.View`
-  flex: 0.5;
+  align-items: center;
+  paddingTop: 15;
   width: 100%;
-  background-color: white;
+  border-radius: 50px;
 `
 
 export const ContainerDoBotao = styled.View`
@@ -56,4 +57,10 @@ export const ButtonSubmitFooter = styled.View`
   width: 50%;
   background-color: blue;
   align-items: center;
+`
+
+export const ContainerCheck = styled.View`
+  
+`
+export const Check = styled.View`
 `

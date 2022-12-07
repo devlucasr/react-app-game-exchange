@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, View, ActivityIndicator } from 'react-native'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../services/connectionFirebase';
-import { stringify } from '@firebase/util';
 
 function CadastroUser() {
   const navigation = useNavigation();
@@ -35,7 +34,6 @@ function CadastroUser() {
   async function cadastrar() {
     await createUserWithEmailAndPassword(auth, email, senha)
       .then(value => {
-        setLoading(false)
         navigation.reset({
           routes: [{ name: "Login" }]
         })
@@ -46,14 +44,11 @@ function CadastroUser() {
         console.log(error)
         if (error.code === 'auth/email-already-in-use') {
           alert('Email já cadastrado')
-          setLoading(false)
         } else if (error.code === 'auth/invalid-email') {
           alert('Formato incorreto!\n\nEx: Exemple@gmail.com')
-          setLoading(false)
-        }
-        setLoading(false)
+        }    
       })
-
+      .finally(() => setLoading(false))
   }
 
   return (
@@ -71,7 +66,7 @@ function CadastroUser() {
           { loading 
           ? <ActivityIndicator size={30} color='#FFFFFF'/>
           : <TextButton>Cadastrar</TextButton>
-        }    
+         }    
           </ButtonSubmit>
         </ContainerForm>
       </ContainerMain>

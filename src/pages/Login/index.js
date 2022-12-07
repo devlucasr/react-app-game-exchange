@@ -23,9 +23,9 @@ function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [loading, setLoading] = useState(false);
-
+   
   //Função valida os dados e comparar com as credencias corretas
-  function ValidaFormLogin () {
+  function ValidaFormLogin(){
     setLoading(true)
     if(email === ''&& senha === ''){
       alert('Preencha o campo Email e Senha')
@@ -49,7 +49,6 @@ function Login() {
    async function Logar(){
     await signInWithEmailAndPassword(auth, email, senha)
     .then(value =>{
-      setLoading(false)
       navigation.reset({
         index: 0,
         routes: [{name: "Home"}]
@@ -59,16 +58,13 @@ function Login() {
       console.log(error)
       if(error.code ==='auth/invalid-email'){
         alert('Email inválido')
-        setLoading(false)
       }else if(error.code === 'auth/wrong-password'){
         alert('Senha inválida')
-        setLoading(false)
       }else if(error.code == 'auth/user-not-found'){
         alert('Email não cadastrado')
-        setLoading(false)
       }
-      setLoading(false)
-    });
+    })
+    .finally(() => setLoading(false))
   }
 
   return (

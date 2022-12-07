@@ -4,11 +4,11 @@ import CadastroCard  from '../pages/CadastroCard'
 import CadastroUser from '../pages/CadastroUser'
 import Home from '../pages/Home'
 const Stack = createNativeStackNavigator();
-
 export default function Routes(){
+
     return(
         <Stack.Navigator
-        initialRouteName='Login'
+        initialRouteName='CadastroCard'
         >
             <Stack.Screen
                 name='Login'

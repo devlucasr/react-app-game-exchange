@@ -1,14 +1,8 @@
 import React from 'react';
 import {
-    Pagina,
     Title,
     ContainerMain,
-    Input,
-    ButtonSubmit,
-    TextButton,
     ContainerTitle,
-    Title2,
-    ContainerFooter,
     ContainerDoBotao
 } from './styles';
 import HeaderHome from '../../../components/HeaderHome';

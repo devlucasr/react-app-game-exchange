@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\lucas.ribeiro\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @react-native-community/checkbox01
+  C:\Program Files\nodejs\node.exe C:\Users\lucas.ribeiro\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @react-native-firebase/app~
 
 PATH: 
-  C:\Users\lucas.ribeiro\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\lucas.ribeiro\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files\nodejs;C:\Users\lucas.ribeiro\AppData\Local\Microsoft\WindowsApps;C:\Users\lucas.ribeiro\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\lucas.ribeiro\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+  C:\APP\AppGame\node_modules\.bin;C:\APP\node_modules\.bin;C:\node_modules\.bin;C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\run-script\lib\node-gyp-bin;C:\APP\AppGame\node_modules\.bin;C:\Users\lucas.ribeiro\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\lucas.ribeiro\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files\nodejs;C:\Users\lucas.ribeiro\AppData\Local\Microsoft\WindowsApps;C:\Users\lucas.ribeiro\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\lucas.ribeiro\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
 
 Yarn version: 
   1.22.19
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@react-native-community%2fcheckbox01: Not found
+  Error: https://registry.yarnpkg.com/@react-native-firebase%2fapp~: Not found
       at Request.params.callback [as _callback] (C:\Users\lucas.ribeiro\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66145:18)
       at Request.self.callback (C:\Users\lucas.ribeiro\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140890:22)
       at Request.emit (node:events:390:28)
@@ -39,9 +39,11 @@ npm manifest:
     },
     "dependencies": {
       "@expo/webpack-config": "^0.16.19",
+      "@react-native-community/checkbox": "^0.5.14",
       "@react-navigation/native": "^6.0.16",
       "@react-navigation/native-stack": "^6.9.4",
       "expo": "~47.0.8",
+      "expo-checkbox": "~2.2.2",
       "expo-status-bar": "~1.4.2",
       "firebase": "^9.14.0",
       "react": "18.1.0",
@@ -1098,19 +1100,12 @@ Lockfile:
       pirates "^4.0.5"
       source-map-support "^0.5.16"
   
-  "@babel/runtime@^7.0.0", "@babel/runtime@^7.14.0", "@babel/runtime@^7.18.6", "@babel/runtime@^7.8.4":
+  "@babel/runtime@^7.0.0", "@babel/runtime@^7.14.0", "@babel/runtime@^7.15.4", "@babel/runtime@^7.18.6", "@babel/runtime@^7.8.4":
     version "7.20.1"
     resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.20.1.tgz"
     integrity sha512-mrzLkl6U9YLF8qpqI7TB82PESyEGjm/0Ly91jG575eVxMMlb8fYfOXFZIJ8XfLrJZQbm7dlKry2bJmXBUEkdFg==
     dependencies:
       regenerator-runtime "^0.13.10"
-  
-  "@babel/runtime@^7.15.4":
-    version "7.20.6"
-    resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.6.tgz#facf4879bfed9b5326326273a64220f099b0fce3"
-    integrity sha512-Q+8MqP7TiHMWzSfwiJwXCjyf4GYA4Dgw3emg/7xmwsdLJOZUp+nMqcOwOzzYheuM1rhDu8FSj2l0aoMygEuXuA==
-    dependencies:
-      regenerator-runtime "^0.13.11"
   
   "@babel/template@^7.0.0", "@babel/template@^7.18.10", "@babel/template@^7.8.6":
     version "7.18.10"
@@ -2184,6 +2179,11 @@ Lockfile:
     resolved "https://registry.npmjs.org/@protobufjs/utf8/-/utf8-1.1.0.tgz"
     integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
   
+  "@react-native-community/checkbox@^0.5.14":
+    version "0.5.14"
+    resolved "https://registry.npmjs.org/@react-native-community/checkbox/-/checkbox-0.5.14.tgz"
+    integrity sha512-UmGf3wBpoCXLmVRKIDZyzOG+QR1fOhm0FOw4KzxHTCXpsBvZgIn5wbJ+MWk4io5RohQdY8GSX2MYFmkPJeJpeA==
+  
   "@react-native-community/cli-clean@^9.2.1":
     version "9.2.1"
     resolved "https://registry.npmjs.org/@react-native-community/cli-clean/-/cli-clean-9.2.1.tgz"
@@ -2500,7 +2500,7 @@ Lockfile:
   
   "@types/lodash@^4.14.175":
     version "4.14.191"
-    resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.191.tgz#09511e7f7cba275acd8b419ddac8da9a6a79e2fa"
+    resolved "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.191.tgz"
     integrity sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==
   
   "@types/long@^4.0.1":
@@ -4896,6 +4896,11 @@ Lockfile:
       path-browserify "^1.0.0"
       url-parse "^1.5.9"
   
+  expo-checkbox@~2.2.2:
+    version "2.2.2"
+    resolved "https://registry.npmjs.org/expo-checkbox/-/expo-checkbox-2.2.2.tgz"
+    integrity sha512-0DXbeJdVAPfqiy+RBkGXHYU2dLxdpyaWAaV3+N+/xWEC2ilqrqCiSqsPcbFQer1f9qaqjNeDUi51qPuF5AgTIw==
+  
   expo-constants@~14.0.0, expo-constants@~14.0.2:
     version "14.0.2"
     resolved "https://registry.npmjs.org/expo-constants/-/expo-constants-14.0.2.tgz"
@@ -5215,7 +5220,7 @@ Lockfile:
   
   firebase@^9.14.0:
     version "9.14.0"
-    resolved "https://registry.npmjs.org/firebase/-/firebase-9.14.0.tgz"
+    resolved "https://registry.yarnpkg.com/firebase/-/firebase-9.14.0.tgz#407de4855092e607d3ee1fb222294ab2b45c4798"
     integrity sha512-wePrsf7W33mhT7RVXQavragoAgXb/NDm22vuhwJXkprrQ2Y9alrEKC5LTAtLJL3P2dHdDmeylS6PLZwWPEE79A==
     dependencies:
       "@firebase/analytics" "0.8.4"
@@ -6694,7 +6699,7 @@ Lockfile:
   
   lodash-es@^4.17.21:
     version "4.17.21"
-    resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
+    resolved "https://registry.npmjs.org/lodash-es/-/lodash-es-4.17.21.tgz"
     integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
   
   lodash.camelcase@^4.3.0:
@@ -7417,7 +7422,7 @@ Lockfile:
   
   nanoclone@^0.2.1:
     version "0.2.1"
-    resolved "https://registry.yarnpkg.com/nanoclone/-/nanoclone-0.2.1.tgz#dd4090f8f1a110d26bb32c49ed2f5b9235209ed4"
+    resolved "https://registry.npmjs.org/nanoclone/-/nanoclone-0.2.1.tgz"
     integrity sha512-wynEP02LmIbLpcYw8uBKpcfF6dmg2vcpKqxeH5UcoKEYdExslsdUA4ugFauuaeYdTB76ez6gJW8XAZ6CgkXYxA==
   
   nanoid@^3.1.23:
@@ -8511,7 +8516,7 @@ Lockfile:
   
   property-expr@^2.0.4:
     version "2.0.5"
-    resolved "https://registry.yarnpkg.com/property-expr/-/property-expr-2.0.5.tgz#278bdb15308ae16af3e3b9640024524f4dc02cb4"
+    resolved "https://registry.npmjs.org/property-expr/-/property-expr-2.0.5.tgz"
     integrity sha512-IJUkICM5dP5znhCckHSv30Q4b5/JA5enCtkRHYaOVOAocnH/1BQEYTC5NMfT3AVl/iXKdr3aqQbQn9DxyWknwA==
   
   protobufjs@^6.11.3:
@@ -8945,7 +8950,7 @@ Lockfile:
     resolved "https://registry.npmjs.org/regenerate/-/regenerate-1.4.2.tgz"
     integrity sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==
   
-  regenerator-runtime@^0.13.10, regenerator-runtime@^0.13.11, regenerator-runtime@^0.13.2:
+  regenerator-runtime@^0.13.10, regenerator-runtime@^0.13.2:
     version "0.13.11"
     resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz"
     integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
@@ -10112,7 +10117,7 @@ Lockfile:
   
   toposort@^2.0.2:
     version "2.0.2"
-    resolved "https://registry.yarnpkg.com/toposort/-/toposort-2.0.2.tgz#ae21768175d1559d48bef35420b2f4962f09c330"
+    resolved "https://registry.npmjs.org/toposort/-/toposort-2.0.2.tgz"
     integrity sha512-0a5EOkAUp8D4moMi2W8ZF8jcga7BgZd91O/yabJCFY8az+XSzeGyTKs0Aoo897iV1Nj6guFq8orWDS96z91oGg==
   
   tr46@~0.0.3:
@@ -10790,7 +10795,7 @@ Lockfile:
   
   yup@^0.32.11:
     version "0.32.11"
-    resolved "https://registry.yarnpkg.com/yup/-/yup-0.32.11.tgz#d67fb83eefa4698607982e63f7ca4c5ed3cf18c5"
+    resolved "https://registry.npmjs.org/yup/-/yup-0.32.11.tgz"
     integrity sha512-Z2Fe1bn+eLstG8DRR6FTavGD+MeAwyfmouhHsIUgaADz8jvFKbO/fXc2trJKZg+5EBjh4gGm3iU/t3onKlXHIg==
     dependencies:
       "@babel/runtime" "^7.15.4"
