@@ -3,12 +3,13 @@ import Login  from '../pages/Login'
 import CadastroCard  from '../pages/CadastroCard'
 import CadastroUser from '../pages/CadastroUser'
 import Home from '../pages/Home'
+import MeusCards from '../pages/MeusAnuncios'
 const Stack = createNativeStackNavigator();
 export default function Routes(){
 
     return(
         <Stack.Navigator
-        initialRouteName='CadastroCard'
+        initialRouteName='Login'
         >
             <Stack.Screen
                 name='Login'
@@ -28,6 +29,11 @@ export default function Routes(){
              <Stack.Screen
                 name='CadastroCard'
                 component={CadastroCard}
+                options={{ headerShown: false}}
+            />
+            <Stack.Screen
+                name='MeusCards'
+                component={MeusCards}
                 options={{ headerShown: false}}
             />
         </Stack.Navigator>       

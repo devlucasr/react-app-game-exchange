@@ -1,47 +1,77 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Title,
     ContainerMain,
     ContainerTitle,
-    ContainerDoBotao
+    ContainerDoBotao,
+    ContainerFlat
 } from './styles';
 import HeaderHome from '../../../components/HeaderHome';
+import Footer from '../../../components/Footer'
+import ListCards from './flatList'
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, Text, FlatList} from 'react-native'
+import { collection, getDocs} from "firebase/firestore"; 
+import { db } from '../../services/connectionFirebase';
 
 function Home() {
-    const navigation = useNavigation();
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        retornaTudo()
+    },[])
+
+   async function retornaTudo(){
+        const querySnapshot = await getDocs(collection(db, "cards"));
+        let array = []
+        querySnapshot.forEach((doc) => {
+            const card = {
+                id: doc.id,
+                nomeGame: doc.data().nomeGame,
+                valorGame: doc.data().valorGame,
+                ps4: doc.data().ps4,
+                ps3: doc.data().ps3,
+                xboxOne: doc.data().xboxOne,
+                cadastradoPor: doc.data().cadastradoPor,
+                aceitaTroca: doc.data().aceitaTroca,
+                aceitaVenda: doc.data().aceitaVenda
+            };
+            array.push(card)
+        });
+        setData(array)
+    }
+
     return (
         <View style={styles.container}>
             <HeaderHome style={styles.header} />
             <ContainerTitle>
-                <Title>Home</Title>
+                <Title>Anúncios</Title>
             </ContainerTitle>
             <ContainerMain>
-                <ContainerDoBotao style={styles.containerBotao}>
-                    <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Home')}>
-                        <Icon name='home' size={40} color='black'/>
-                        <Text>Home</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity  onPress={() => navigation.navigate('CadastroCard')}>
-                        <Icon style={styles.icone} name='pluscircleo' size={40} color='black'/>
-                        <Text>Cadastrar Anúncio</Text>
-                    </TouchableOpacity>
-                </ContainerDoBotao>
-
+                <ContainerFlat>
+                    <FlatList 
+                        data={data}
+                        keyExtractor={item => item.id}
+                        renderItem={({item}) => <ListCards data={item}/>}
+                    />
+                </ContainerFlat>
             </ContainerMain>
+            <Footer/>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     containerBotao: {
-        display: 'flex',
         flexDirection: 'row',
+        position: 'absolute',
+        bottom: '5%',
+        
     },
     container: {
         backgroundColor: '#000',
+        height: '100%',
     },
     botao: {
         marginRight: 180,

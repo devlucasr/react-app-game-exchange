@@ -4,14 +4,14 @@ export const Pagina = styled.View`
 
 `
 export const ContainerMain = styled.View`
-  height: 100%;
+  height: 64%;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
   background-color: white;
 `
 export const ContainerForm = styled.View`
   align-items: center;
-  paddingTop: 15;
+  padding-top: 15;
   width: 100%;
   border-radius: 50px;
 `

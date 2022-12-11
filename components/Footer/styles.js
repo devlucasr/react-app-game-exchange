@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 
 export const ContainerMain = styled.View`
-  height: 64%;
+  height: 63%;
   border-top-left-radius: 40px;
   border-top-right-radius:50px;
   background-color: white;

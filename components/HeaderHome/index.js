@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet,TouchableOpacity, Text  } from 'react-native';
 import { Container } from './styles';
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from 'react-native-vector-icons/Entypo';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -10,7 +10,7 @@ function HeaderHome() {
   return(
     <Container style={styles.container}>
       <TouchableOpacity>
-        <Icon name='logout' size={35} color='white' onPress={() => navigation.navigate('Login')} style={styles.icone}/>
+        <Icon name='log-out' size={35} color='white' onPress={() => navigation.navigate('Login')} style={styles.icone}/>
         <Text style={styles.texto}>Sair</Text>
       </TouchableOpacity>
       <Image

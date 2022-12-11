@@ -1,34 +1,26 @@
 import React, { useState } from 'react';
-import {
-  Title,
-  ContainerMain,
-  Input,
-  ButtonSubmit,
-  TextButton,
-  ContainerTitle,
-  Check,
-  ContainerCheck,
-  ContainerForm,
-  ContainerDoBotao
+import { Title, ContainerMain, Input, ButtonSubmit, TextButton, ContainerTitle, Check, ContainerCheck, ContainerForm, ContainerDoBotao
 } from './styles';
 import Header from '../../../components/HeaderCadastroCard';
+import Footer from '../../../components/Footer'
 import CheckBox from 'expo-checkbox';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { StyleSheet, View, TouchableOpacity,Text } from 'react-native'
+import { StyleSheet, View, TouchableOpacity,Text, ActivityIndicator, Image } from 'react-native'
 import { db } from '../../services/connectionFirebase';
 import { collection, addDoc, serverTimestamp } from "firebase/firestore"; 
-import { onAuthStateChanged, getAuth } from "firebase/auth";
-import { auth } from '../../services/connectionFirebase'
+import { getAuth } from "firebase/auth";
 
 function CadastroCard() {
-  const navigation = useNavigation();
+  const [loading, setLoading] = useState(false);
+  const [checkedPS4, setCheckedPS4] = useState(false);
+  const [checkedPS3, setCheckedPS3] = useState(false);
+  const [checkedXone, setCheckedXone] = useState(false);
   const [checkedValor, setCheckedValor] = useState(false);
   const [checkedTroca, setCheckedTroca] = useState(false);
-
+  
   const [nomeGame, setNomeGame] = useState('');
-  const [nomeConsole, setNomeConsole] = useState('');
-  const [valorGame, setValorGame] = useState(30);
+  const [valorGame, setValorGame] = useState('');
   
   //Busca email logado no momento
   const auth = getAuth();
@@ -36,17 +28,56 @@ function CadastroCard() {
   const cadastradoPor = user.email
 
 
+  //Função valida se os campos do form forão preenchidos
+  function validaForm(){
+    setLoading(true)
+    if(nomeGame === ''){
+      alert('Preencha o nome do Game')
+      setLoading(false)
+    }else if(!checkedPS3 && !checkedPS4 && !checkedXone){
+      alert('Selecione 1 console')
+      setLoading(false)
+    }else if(checkedPS4 && checkedPS3 && checkedXone){
+      alert('Selecione 1 console')
+      setLoading(false)
+    }else if(checkedPS4 && checkedPS3){
+      alert('Selecione 1 console')
+      setLoading(false)
+    }else if(checkedPS4 && checkedXone){
+      alert('Selecione 1 console')
+      setLoading(false)
+    }else if(checkedPS3 && checkedXone){
+      alert('Selecione 1 console')
+      setLoading(false)
+    }
+
+    else if(!checkedTroca && !checkedValor){
+      alert('Selecione ao menos um tipo de negociação')
+      setLoading(false)
+    }
+    else if(checkedValor && valorGame === ''){
+      alert('Preencha o valor do Game')
+      setLoading(false)
+    }else{
+      cadastro()
+    }
+  }
+
  function cadastro (){
   addDoc(collection(db, "cards"), {
     cadastradoPor: cadastradoPor,
-    nomeGame: nomeGame,
-    nomeConsole: nomeConsole,
+    nomeGame: nomeGame.toUpperCase(),
     aceitaVenda: checkedValor,
-    aceeitaTroca: checkedTroca,
+    aceitaTroca: checkedTroca,
+    ps4: checkedPS4,
+    ps3: checkedPS3,
+    xboxOne : checkedXone,
     valorGame: valorGame,
     data_criacao: serverTimestamp()
   })
   .then(() => alert('Cadastrado com sucesso'))
+  .then(() => setLoading(false))
+  .then(() => setNomeGame(''), setValorGame(''))
  }
 
   return (
@@ -58,8 +89,42 @@ function CadastroCard() {
       <ContainerMain>
         <ContainerForm>
           <Title style={styles.title}>Preencha as informações do Anúncio</Title>
-          <Input placeholderTextColor="black" placeholder="Nome do Game" onChangeText={setNomeGame} maxLength={30}></Input>
-          <Input placeholderTextColor="black" placeholder="Console" onChangeText={setNomeConsole} maxLength={10}></Input>
+          <Input placeholderTextColor="black" placeholder="Nome do Game" value={nomeGame} onChangeText={setNomeGame} maxLength={20}></Input>
+          <View style={styles.containerCheckGames}>
+            
+            <CheckBox
+              style={styles.checkGames}
+              value={checkedPS4}
+              onValueChange={setCheckedPS4}
+              color={checkedPS4 ? '#007EC1' : '#000'}
+            />
+            <CheckBox
+              style={styles.checkGames}
+              value={checkedPS3}
+              onValueChange={setCheckedPS3}
+              color={checkedPS3 ? '#2F2F2F' : '#000'}
+            /> 
+            <CheckBox
+              style={styles.checkGames}
+              value={checkedXone} 
+              onValueChange={setCheckedXone}
+              color={checkedXone ? '#007F44' : '#000'}
+            />
+          </View>
+          <View style={styles.imagem}>
+            <Image
+              style={{marginRight: '3%'}}
+              source={require('../../../assets/imagens/ps4.png')}
+            />
+
+            <Image
+              style={{marginRight: '3%'}}
+              source={require('../../../assets/imagens/ps3.png')}
+              />
+            <Image
+              source={require('../../../assets/imagens/xbox-one.png')}
+            />
+          </View>
           <ContainerCheck style={styles.containercheck}>
             <Check style={styles.check}>
               <Text style={styles.checkText}>Aceita troca?</Text>
@@ -84,24 +149,18 @@ function CadastroCard() {
             </Check>
           </ContainerCheck>
           { checkedValor && (
-            <Input placeholderTextColor="black" placeholder="Valor" onChangeText={setValorGame} keyboardType= 'numeric' maxLength={6}></Input>
+            <Input placeholderTextColor="black" placeholder="Valor" value={valorGame} onChangeText={setValorGame} keyboardType= 'numeric' maxLength={3}></Input>
             )
           }
-           <ButtonSubmit onPress={cadastro} >
-              <TextButton>Cadastrar</TextButton>
+           <ButtonSubmit onPress={validaForm} disabled={loading}>
+            { loading 
+              ? <ActivityIndicator size={30} color='#FFFFFF'/>
+              : <TextButton>Cadastrar</TextButton>
+            }  
           </ButtonSubmit>
         </ContainerForm>
-        <ContainerDoBotao style={styles.containerBotao}>
-          <TouchableOpacity style={styles.botao}>
-            <Icon name='home' size={40} color='black' onPress={() => navigation.navigate('Home')}/>
-            <Text>Home</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('CadastroCard')}>
-            <Icon style={styles.icone} name='pluscircleo' size={40} color='black'/>
-            <Text>Cadastrar Anúncio</Text>
-          </TouchableOpacity>
-        </ContainerDoBotao>
       </ContainerMain>
+      <Footer/>
     </View>
   )
 }
@@ -116,6 +175,7 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: '#000',
+    height: '100%',
   },
   botao: {
     marginRight: 180,
@@ -129,9 +189,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingRight: '5%',
   },
+  containerCheckGames:{
+    flexDirection: 'row',
+    marginLeft: '25%',
+  },
+  checkGames:{
+    marginRight: '33%',
+  },
   containercheck:{
     display: 'flex',
     flexDirection: 'row',
+    
   },
   buttonCheck:{
     marginTop: '1%',
@@ -143,8 +211,15 @@ const styles = StyleSheet.create({
   title:{
     color: '#000',
     fontSize: 20,
-    paddingBottom: 20,
+    paddingBottom: 10,
     fontWeight: 'bold',
+  },
+  imagem:{
+    justifyContent: 'center',
+    height: 80,
+    paddingTop: 20,
+    width: '100%',
+    flexDirection: 'row',
   }
 });
 
