@@ -27,7 +27,7 @@ function Home() {
         let array = []
         querySnapshot.forEach((doc) => {
             const card = {
-                id: doc.id,
+                id: doc.data().data_criacao,
                 nomeGame: doc.data().nomeGame,
                 valorGame: doc.data().valorGame,
                 ps4: doc.data().ps4,
@@ -35,12 +35,14 @@ function Home() {
                 xboxOne: doc.data().xboxOne,
                 cadastradoPor: doc.data().cadastradoPor,
                 aceitaTroca: doc.data().aceitaTroca,
-                aceitaVenda: doc.data().aceitaVenda
+                aceitaVenda: doc.data().aceitaVenda,
             };
             array.push(card)
         });
         setData(array)
     }
+
+    console.log(data); 
 
     return (
         <View style={styles.container}>

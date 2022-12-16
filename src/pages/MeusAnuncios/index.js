@@ -15,6 +15,7 @@ import { StyleSheet, View, TouchableOpacity, Text, FlatList } from 'react-native
 import { collection, where, query, getDocs } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { db } from '../../services/connectionFirebase';
+import { array } from 'yup';
 
 function MeusCards() {
     const navigation = useNavigation();
@@ -65,7 +66,7 @@ function MeusCards() {
                 </ContainerFlat>
             </ContainerMain>
             <ContainerDoBotao style={styles.containerBotao}>
-                <TouchableOpacity onPress={() => { navigation.navigate('Home') }}>
+                <TouchableOpacity onPress={() => { navigation.navigate('Home')}}>
                     <Icon name='home' size={40} color='white' />
                     <Text style={{ color: 'white' }}>Home</Text>
                 </TouchableOpacity>

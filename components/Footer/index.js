@@ -13,7 +13,7 @@ const navigation = useNavigation();
 
     return (
         <ContainerDoBotao style={styles.containerBotao}>
-            <TouchableOpacity onPress={() => {navigation.navigate('Home'), atualiza.retornaTudo()}}>
+            <TouchableOpacity onPress={() => {navigation.navigate('Home')}}>
                 <Icon name='home' size={40} color='white' />
                 <Text style={{ color: 'white' }}>Home</Text>
             </TouchableOpacity>

@@ -12,6 +12,7 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 function CadastroCard() {
+  const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [checkedPS4, setCheckedPS4] = useState(false);
   const [checkedPS3, setCheckedPS3] = useState(false);
@@ -75,8 +76,9 @@ function CadastroCard() {
     valorGame: valorGame,
     data_criacao: serverTimestamp()
   })
-  .then(() => alert('Cadastrado com sucesso'))
   .then(() => setLoading(false))
+  .then(() => alert('Cadastrado com sucesso'))
+  .then(() => {navigation.reset({routes: [{name: "MeusCards"}]})})
   .then(() => setNomeGame(''), setValorGame(''))
  }
 
@@ -91,7 +93,6 @@ function CadastroCard() {
           <Title style={styles.title}>Preencha as informações do Anúncio</Title>
           <Input placeholderTextColor="black" placeholder="Nome do Game" value={nomeGame} onChangeText={setNomeGame} maxLength={20}></Input>
           <View style={styles.containerCheckGames}>
-            
             <CheckBox
               style={styles.checkGames}
               value={checkedPS4}
